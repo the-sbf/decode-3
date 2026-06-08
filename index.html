@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Pitch · Decode Your Future</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070d;--bg2:#0d0e18;--panel:#11131f;--panel2:#161929;--line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.14);--ink:#eef1fb;--mute:#9aa0bd;--faint:#646a87;--crimson:#ff3457;--crimson-d:#c01f3c;--cyan:#34e6f0;--gold:#ffc24b;--green:#54e08b;--purple:#9b8cff;--r:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Sora',sans-serif;min-height:100vh;overflow-x:hidden;position:relative;
+ background-image:radial-gradient(900px 600px at 50% -10%,rgba(255,52,87,.10),transparent 60%),radial-gradient(700px 520px at 50% 120%,rgba(255,194,75,.07),transparent 55%)}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:44px 44px;opacity:.3;mask-image:radial-gradient(ellipse 80% 70% at 50% 35%,#000 40%,transparent 100%)}
+.wrap{position:relative;z-index:2;max-width:680px;margin:0 auto;padding:32px 20px 64px}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.34em;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--gold)}
+h1{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(34px,7vw,56px);line-height:.98;margin:13px 0 8px}
+h1 .b{color:var(--crimson)}
+.sub{color:var(--mute);font-size:15px;font-weight:300;max-width:54ch;line-height:1.55}
+.stage{margin-top:26px;background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line2);border-radius:var(--r);box-shadow:0 34px 80px -42px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.04);overflow:hidden}
+.bar{display:flex;align-items:center;gap:8px;padding:13px 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.015);font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--faint);letter-spacing:.14em}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.body{padding:24px}
+.field{margin-bottom:15px}
+.flabel{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:7px}
+input[type=text],select,textarea{width:100%;background:#0c0e18;border:1px solid var(--line2);border-radius:10px;padding:12px 14px;color:var(--ink);font-family:'Sora',sans-serif;font-size:14px;outline:none}
+textarea{min-height:78px;resize:vertical;line-height:1.5}
+input:focus,select:focus,textarea:focus{border-color:var(--cyan)}
+select{appearance:none;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,var(--mute) 50%),linear-gradient(135deg,var(--mute) 50%,transparent 50%);background-position:calc(100% - 18px) 18px,calc(100% - 13px) 18px;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+.cta{width:100%;margin-top:8px;padding:15px;border:none;border-radius:11px;cursor:pointer;font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:15px;letter-spacing:.05em;color:#fff;background:linear-gradient(100deg,var(--crimson),var(--crimson-d));box-shadow:0 14px 38px -16px rgba(255,52,87,.85);transition:transform .12s}
+.cta:hover{transform:translateY(-2px)}
+.cta.gold{background:linear-gradient(100deg,#d99a1c,#a06a0a);box-shadow:0 14px 38px -16px rgba(255,194,75,.6);color:#1a1205}
+.cta.cyan{background:linear-gradient(100deg,#1b9aa3,#0c6f76);box-shadow:0 14px 38px -16px rgba(52,230,240,.6)}
+.fade{opacity:0;transform:translateY(12px);animation:fade .55s forwards}
+@keyframes fade{to{opacity:1;transform:none}}
+.hookline{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(22px,5vw,30px);line-height:1.2;text-align:center;margin:8px 0}
+.hookline.b{color:var(--crimson)}
+.shead{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
+.stitle{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:22px;margin-bottom:6px;line-height:1.18}
+.sintro{font-size:13.5px;color:var(--mute);font-weight:300;line-height:1.55;margin-bottom:16px}
+.optcard{width:100%;text-align:left;background:#0f1120;border:1px solid var(--line2);border-radius:12px;padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:.13s}
+.optcard:hover{border-color:var(--cyan);background:#131630;transform:translateX(2px)}
+.optcard .ot{font-size:14.5px;color:var(--ink);font-weight:500}
+.optcard .od{font-size:12.5px;color:var(--mute);font-weight:300;margin-top:3px;line-height:1.4}
+.progress{display:flex;gap:6px;margin-bottom:16px}
+.seg{height:4px;flex:1;border-radius:3px;background:#222740}
+.seg.on{background:var(--gold)}
+.review{background:#0c0e18;border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:8px}
+.rvname{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:24px;color:var(--crimson);margin-bottom:3px}
+.rvtag{font-size:14px;color:var(--ink);font-weight:300;font-style:italic;margin-bottom:14px;line-height:1.4}
+.rvrow{display:flex;gap:10px;font-size:13px;margin-bottom:8px;line-height:1.4}
+.rvrow .k{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;min-width:74px;padding-top:2px}
+.rvrow .v{color:var(--ink)}
+.backers{display:flex;gap:8px;margin-bottom:16px}
+.backer{flex:1;text-align:center;padding:11px 6px;border:1px solid var(--line);border-radius:11px;background:#0c0e18;transition:.2s;opacity:.5}
+.backer.active{opacity:1;border-color:var(--gold);box-shadow:0 0 18px -6px rgba(255,194,75,.6)}
+.backer .av{width:34px;height:34px;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:15px;color:#0a0a0f}
+.backer .bn{font-size:11.5px;font-weight:500;color:var(--ink)}
+.backer .bl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;color:var(--faint);text-transform:uppercase;margin-top:2px}
+.timerrow{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.timertrack{flex:1;height:6px;background:#1c2030;border-radius:4px;overflow:hidden}
+.timerfill{height:100%;width:100%;background:var(--gold);border-radius:4px;transition:width .1s linear}
+.timernum{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold);min-width:30px;text-align:right}
+.qcard{background:rgba(255,194,75,.06);border:1px solid rgba(255,194,75,.24);border-radius:12px;padding:15px 16px;margin-bottom:8px}
+.qfrom{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:var(--gold);margin-bottom:6px}
+.qtext{font-size:15px;line-height:1.5;color:var(--ink)}
+.btag{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.14em;color:var(--faint);text-transform:uppercase;margin:14px 0 8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.stretchbadge{color:var(--gold);border:1px solid rgba(255,194,75,.4);padding:2px 8px;border-radius:20px;font-size:9.5px}
+.choice{width:100%;text-align:left;background:#0f1120;border:1px solid var(--line2);border-radius:12px;padding:13px 15px;margin-bottom:10px;color:var(--ink);font-family:'Sora',sans-serif;font-size:13.5px;line-height:1.42;cursor:pointer;transition:.13s}
+.choice:hover{border-color:var(--gold);background:#16130a;transform:translateX(2px)}
+.outcome{animation:fade .4s}
+.ohead{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+.opick{font-size:14px;color:var(--ink);font-weight:500;margin-bottom:12px;line-height:1.4}
+.oout{font-size:14px;color:var(--mute);font-weight:300;line-height:1.55;margin-bottom:14px}
+.skillchips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:8px}
+.skillchip{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--cyan);border:1px solid rgba(52,230,240,.4);padding:4px 9px;border-radius:20px}
+.instinct{color:var(--crimson);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;margin:8px 0}
+.hesitate{color:var(--gold);font-size:12.5px;font-style:italic;margin-bottom:10px}
+.deb{animation:fade .5s}
+.vcard{display:flex;align-items:center;gap:12px;background:#0c0e18;border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin-bottom:10px}
+.vcard .av{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:16px;color:#0a0a0f}
+.vcard .vn{font-size:13px;color:var(--mute)}
+.vcard .vv{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:16px;margin-top:1px}
+.bigverdict{text-align:center;padding:24px 16px;border-radius:var(--r);margin:6px 0 14px;border:1px solid var(--line2)}
+.bigverdict .l{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.26em;color:var(--faint);text-transform:uppercase}
+.bigverdict .v{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(28px,7vw,40px);line-height:1.05;margin:8px 0 6px}
+.bigverdict .s{font-size:13.5px;color:var(--mute);font-weight:300;line-height:1.5}
+.pcard{background:linear-gradient(160deg,#15131f,#0b0c14);border:1px solid var(--line2);border-radius:var(--r);padding:20px;margin-bottom:12px;position:relative;overflow:hidden}
+.pcard .stamp{position:absolute;top:14px;right:14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;padding:5px 10px;border-radius:6px;text-transform:uppercase}
+.pcard .pn{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:26px;color:var(--crimson);line-height:1;margin-bottom:6px;max-width:78%}
+.pcard .ptag{font-size:14px;font-style:italic;color:var(--ink);font-weight:300;margin-bottom:16px;line-height:1.4}
+.pcard .prow{display:flex;gap:10px;font-size:12.5px;margin-bottom:7px;line-height:1.4}
+.pcard .prow .k{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;min-width:64px;padding-top:2px}
+.chips2{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chip2{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cyan);border:1px solid rgba(52,230,240,.35);padding:3px 8px;border-radius:18px}
+.debbox{background:#0c0e18;border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px}
+.debbox .l{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:var(--cyan);text-transform:uppercase;margin-bottom:10px}
+.debnote{font-size:13.5px;color:var(--mute);font-weight:300;line-height:1.55}
+.debnote b{color:var(--gold);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 16px}
+.chip{font-size:14px;padding:10px 16px;border-radius:30px;border:1px solid var(--line2);background:transparent;color:var(--mute);cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--cyan);color:var(--ink)}
+.chip.on{background:rgba(52,230,240,.12);border-color:var(--cyan);color:var(--cyan)}
+.echo{border-left:2px solid var(--cyan);padding:6px 0 6px 16px;margin:12px 0;color:var(--ink);font-size:14px;font-style:italic;font-weight:300}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h2 class="sr">The Pitch: build your own venture in your world, then pitch it to three backers against the clock.</h2>
+  <div class="kicker">Decode your future · station 03</div>
+  <h1>THE <span class="b">PITCH</span></h1>
+  <p class="sub">You decoded who you are. You lived a day in it. Now build something of your own, and pitch it to a room that decides whether it lives.</p>
+  <div class="stage">
+    <div class="bar"><span class="dot"></span> <span id="barlabel">PITCH_ROOM // sync your profile</span></div>
+    <div class="body" id="body"></div>
+  </div>
+</div>
+<script>
+var TYPES={Spark:'Communicating with Impact',Anchor:'Collaborative Relationships',Analyst:'Analytical Thinking & PS',Architect:'Goal-Driven & Proactive',Builder:'Tenacity',Original:'Innovative & Curious'};
+var WORLDS={Entrepreneurship:1,'AI & Robotics':1,'Healthcare':1,'Green Economy':1,'Social Change':1};
+var GROWTH={voc:'Word power',vr:'Reasoning with words',rc:'Making sense of what you read',mem:'Holding lots of detail',nvr:'Spotting patterns & space',comp:'Fast number work'};
+var NUM=['comp','nvr','mem'],WORD=['voc','vr','rc'];
+
+var PROBLEMS={
+ 'Entrepreneurship':['Small local shops can\u2019t compete with big chains on price.','Young people make great products but can\u2019t reach customers.','Getting paid digitally is still hard for small businesses.','Good food gets wasted while people nearby go hungry.'],
+ 'AI & Robotics':['People can\u2019t tell what is real online any more.','Useful AI is locked behind English and expensive phones.','Farmers lose crops they could have saved with better data.','Small businesses can\u2019t afford the tech the big ones use.'],
+ 'Healthcare':['Clinics are overcrowded and people wait all day.','People miss treatment because health info isn\u2019t in their language.','Mental health support is hard for teens to reach.','Rural areas are far from the nearest doctor.'],
+ 'Green Economy':['Power cuts still hit the poorest communities hardest.','Recycling barely happens because it is a hassle.','Clean energy feels out of reach for ordinary homes.','Plastic waste is choking local rivers and beaches.'],
+ 'Social Change':['Talented kids miss out because of where they were born.','People don\u2019t know the rights and help they are owed.','Safe spaces for young people are disappearing.','Good causes can\u2019t reach the people who would support them.']};
+var WHOS={
+ 'Entrepreneurship':['Small local businesses and spaza shops','Young people starting their first hustle','Families trying to stretch every rand','Customers the big companies ignore'],
+ 'AI & Robotics':['People who don\u2019t trust or understand AI yet','Learners who study in their home language','Small-scale farmers','Tiny businesses with no tech budget'],
+ 'Healthcare':['Patients in under-served areas','Overworked nurses and clinic staff','Teenagers struggling silently','Parents managing a child\u2019s condition'],
+ 'Green Economy':['Households tired of power cuts','Communities living near pollution','Young people who want to act on climate','Small towns with no recycling'],
+ 'Social Change':['Young people with potential and no platform','Communities cut off from services','Teens who need somewhere safe','Grassroots groups doing real work']};
+var ANGLES=[{t:'Make it radically cheaper',p:'making it radically cheaper'},{t:'Make it stupidly simple to use',p:'making it stupidly simple to use'},{t:'Use smart tech to do the hard part',p:'using smart tech to do the hard part'},{t:'Build it on community and trust',p:'building it on community and trust'}];
+var MODELS=[{t:'Sell it directly to the people who use it',p:'selling directly to the people who use it'},{t:'A small monthly subscription',p:'a small monthly subscription'},{t:'Free for users, businesses or sponsors pay',p:'letting sponsors pay so users go free'},{t:'Grant-funded, kept low-cost on purpose',p:'grant funding that keeps it low-cost'}];
+var BACKERS={inv:{n:'Zinhle',l:'Investor',c:'#ffc24b'},com:{n:'Mandla',l:'Community',c:'#54e08b'},bld:{n:'Priya',l:'Builder',c:'#34e6f0'}};
+
+var P={name:'Slade',type:'Spark',world:'Entrepreneurship',growth:'vr'};
+var SEL={prob:0,who:0,angle:0,model:0,name:'',tagline:''};
+var ST={};
+var body=document.getElementById('body');
+function setBar(t){document.getElementById('barlabel').textContent=t;}
+function lc(s){return s.charAt(0).toLowerCase()+s.slice(1);}
+var timerId=null;
+
+sync();
+
+function sync(){
+ setBar('PITCH_ROOM // sync your profile');
+ var typeOpts=Object.keys(TYPES).map(function(k){return '<option'+(k===P.type?' selected':'')+'>'+'The '+k+'</option>';}).join('');
+ var worldOpts=Object.keys(WORLDS).map(function(k){return '<option'+(k===P.world?' selected':'')+'>'+k+'</option>';}).join('');
+ var growthOpts=Object.keys(GROWTH).map(function(k){return '<option value="'+k+'"'+(k===P.growth?' selected':'')+'>'+GROWTH[k]+'</option>';}).join('');
+ body.innerHTML='<div class="shead">\u25C8 sync your decoder results</div><p class="sintro">Bring your three results. They decide your world, your founder instincts, and your toughest backer.</p>'+
+  '<div class="field"><div class="flabel">Your name</div><input type="text" id="f-name" value="'+P.name+'" maxlength="18"></div>'+
+  '<div class="field"><div class="flabel">Your future-fit type</div><select id="f-type">'+typeOpts+'</select></div>'+
+  '<div class="field"><div class="flabel">Your strongest world</div><select id="f-world">'+worldOpts+'</select></div>'+
+  '<div class="field"><div class="flabel">Your growth zone</div><select id="f-growth">'+growthOpts+'</select></div>'+
+  '<button class="cta" id="go">ENTER THE PITCH ROOM</button>';
+ document.getElementById('go').onclick=function(){
+  P.name=(document.getElementById('f-name').value||'You').trim().slice(0,18);
+  P.type=document.getElementById('f-type').value.replace('The ','');
+  P.world=document.getElementById('f-world').value;P.growth=document.getElementById('f-growth').value;
+  SEL={prob:0,who:0,angle:0,model:0,name:'',tagline:''};hook();
+ };
+}
+
+function hook(){
+ setBar('PITCH_ROOM // '+P.world);
+ body.innerHTML='<div style="padding:18px 0"><div class="hookline fade">Yesterday, you survived a day in 2035.</div>'+
+  '<div class="hookline b fade" style="animation-delay:1s">Today, you build the thing that day was about.</div></div>';
+ setTimeout(function(){
+  body.innerHTML='<div class="fade"><div class="backers">'+backerRow(null)+'</div>'+
+   '<div style="text-align:center;padding:8px 0 4px"><div class="shead" style="text-align:center">The room is waiting</div>'+
+   '<div class="stitle" style="font-size:26px">One shot. What are you building?</div>'+
+   '<p class="sintro" style="text-align:center;max-width:46ch;margin:6px auto 16px">Zinhle, Mandla and Priya will decide if your idea lives. First, build it.</p></div>'+
+   '<button class="cta gold" id="start">START BUILDING</button></div>';
+  document.getElementById('start').onclick=function(){ST={step:0};buildStep();};
+ },2600);
+}
+function backerRow(active){var h='';for(var k in BACKERS){var b=BACKERS[k];h+='<div class="backer'+(active===k?' active':'')+'"><div class="av" style="background:'+b.c+'">'+b.n.charAt(0)+'</div><div class="bn">'+b.n+'</div><div class="bl">'+b.l+'</div></div>';}return h;}
+
+var BUILD=[
+ {key:'prob',head:'Build 1 of 6 \u00B7 the problem',title:'Every venture starts with a problem worth solving.',intro:'In '+'',opts:function(){return PROBLEMS[P.world].map(function(t){return {t:t};});},pre:function(){return 'In '+P.world+', which problem is yours to crack?';}},
+ {key:'who',head:'Build 2 of 6 \u00B7 who it is for',title:'Who feels this problem the hardest?',pre:function(){return 'A venture for everyone helps no one. Pick who you are really building for.';},opts:function(){return WHOS[P.world].map(function(t){return {t:t};});}},
+ {key:'angle',head:'Build 3 of 6 \u00B7 your angle',title:'Lots of people see this problem. What is YOUR move?',pre:function(){return 'The angle is the thing that is new about how you solve it.';},opts:function(){return ANGLES;}},
+ {key:'model',head:'Build 4 of 6 \u00B7 how it survives',title:'An idea only survives if it can keep going.',pre:function(){return 'How does your venture sustain itself?';},opts:function(){return MODELS;}}
+];
+
+function buildStep(){
+ var seg='';for(var i=0;i<6;i++)seg+='<div class="seg'+(i<=ST.step?' on':'')+'"></div>';
+ if(ST.step<4){
+  var s=BUILD[ST.step];setBar('BUILD // '+P.world);
+  var opts=s.opts();var cards='';opts.forEach(function(o,idx){cards+='<button class="optcard" data-i="'+idx+'"><div class="ot">'+o.t+'</div>'+(o.d?'<div class="od">'+o.d+'</div>':'')+'</button>';});
+  body.innerHTML='<div class="fade"><div class="progress">'+seg+'</div><div class="shead">'+s.head+'</div><div class="stitle">'+s.title+'</div><p class="sintro">'+s.pre()+'</p>'+cards+'</div>';
+  document.querySelectorAll('.optcard').forEach(function(b){b.onclick=function(){SEL[s.key]=+b.dataset.i;ST.step++;buildStep();};});
+ } else if(ST.step===4){
+  setBar('BUILD // name it');
+  body.innerHTML='<div class="fade"><div class="progress">'+seg+'</div><div class="shead">Build 5 of 6 \u00B7 name it</div><div class="stitle">Give it a name.</div><p class="sintro">Every great company was once a blank space where a name went. Type yours. Make it yours.</p>'+
+   '<div class="field"><input type="text" id="vname" maxlength="28" placeholder="your venture name" value="'+SEL.name+'"></div><button class="cta gold" id="next">NEXT</button></div>';
+  document.getElementById('next').onclick=function(){SEL.name=(document.getElementById('vname').value||'My Venture').trim().slice(0,28);ST.step++;buildStep();};
+ } else if(ST.step===5){
+  setBar('BUILD // the pitch line');
+  var scaffold=SEL.tagline||('We help '+lc(WHOS[P.world][SEL.who])+' by '+ANGLES[SEL.angle].p+'.');
+  body.innerHTML='<div class="fade"><div class="progress">'+seg+'</div><div class="shead">Build 6 of 6 \u00B7 the pitch line</div><div class="stitle">Say it in one sentence.</div><p class="sintro">If you only had ten seconds, what would you say? We started it for you. Make it sharper.</p>'+
+   '<div class="field"><textarea id="vtag" maxlength="140">'+scaffold+'</textarea></div><button class="cta gold" id="next">SEE MY VENTURE</button></div>';
+  document.getElementById('next').onclick=function(){SEL.tagline=(document.getElementById('vtag').value||scaffold).trim().slice(0,140);reviewScreen();};
+ }
+}
+
+function reviewScreen(){
+ setBar('PITCH_ROOM // ready');
+ body.innerHTML='<div class="fade"><div class="shead">your venture</div><div class="review"><div class="rvname">'+SEL.name+'</div><div class="rvtag">\u201c'+SEL.tagline+'\u201d</div>'+
+  '<div class="rvrow"><span class="k">Problem</span><span class="v">'+PROBLEMS[P.world][SEL.prob]+'</span></div>'+
+  '<div class="rvrow"><span class="k">For</span><span class="v">'+WHOS[P.world][SEL.who]+'</span></div>'+
+  '<div class="rvrow"><span class="k">Angle</span><span class="v">'+ANGLES[SEL.angle].t+'</span></div>'+
+  '<div class="rvrow"><span class="k">Model</span><span class="v">'+MODELS[SEL.model].t+'</span></div></div>'+
+  '<p class="sintro" style="text-align:center;margin:14px 0 6px">The backers are seated. From here, the clock runs on every answer.</p>'+
+  '<button class="cta" id="pitch">PITCH IT \u25B8</button></div>';
+ document.getElementById('pitch').onclick=function(){ST={i:0,score:0,bs:{},skills:{},maxBeat:0};pitchBeat();};
+}
+
+function beats(){
+ var name=SEL.name,wholow=lc(WHOS[P.world][SEL.who]),anglelow=ANGLES[SEL.angle].p,modelp=MODELS[SEL.model].p;
+ return [
+ {id:'A',backer:null,time:22,tag:'The opening',q:'The room goes silent. Three backers, watching. You open with...',
+  choices:[{t:'The problem, painted so clearly the whole room feels it.',skills:['Communicating with Impact','Critical Thinking'],score:3,out:'You name the problem and the room nods. Now they need your answer to it.'},
+   {t:'Your why, the personal reason this matters to you.',skills:['Communicating with Impact','Tenacity'],score:3,out:'You make it personal. Backers fund founders, not just ideas, and they just met yours.'},
+   {t:'The size of the opportunity, leading with numbers.',skills:['Analytical Thinking & PS','Goal-Driven & Proactive'],score:2,out:'Solid, but numbers before feeling can cool a room. They are interested, not gripped, yet.'}],timeout:2},
+ {id:'B',backer:'inv',time:24,tag:'Zinhle the Investor',stretchFor:NUM,q:'\u201c'+name+' sounds interesting. But how does it actually make money, and grow?\u201d',
+  choices:[{t:'We earn by '+modelp+', and grow by reaching more of '+wholow+' over time.',skills:['Financial Literacy','Analytical Thinking & PS','Goal-Driven & Proactive'],score:3,out:'A clear model and a path to scale. Zinhle leans back, convinced you can keep the lights on.'},
+   {t:'We will figure out the money once we have lots of users.',skills:[],score:1,out:'\u201cHope is not a business model,\u201d Zinhle says. Users with no revenue is a countdown, not a company.'},
+   {t:'We keep costs low and just sell as much as we can.',skills:['Goal-Driven & Proactive'],score:2,out:'\u201cSell more\u201d is effort, not a growth plan. Zinhle wants to see the engine, not just the hustle.'}],timeout:2},
+ {id:'C',backer:'com',time:24,tag:'Mandla the Community voice',stretchFor:WORD,q:'\u201cWho does '+name+' really help, and could it leave anyone worse off?\u201d',
+  choices:[{t:'It helps '+wholow+'. The risk is leaving others out, so we build with them and keep listening.',skills:['Collaborative Relationships','Critical Thinking','Communicating with Impact'],score:3,out:'You named who you serve AND a real risk. Mandla trusts a founder who can see their own blind spots.'},
+   {t:'It helps everyone, honestly there is no downside.',skills:[],score:1,out:'\u201cEverything has a downside,\u201d Mandla says. \u201cNot seeing yours is the downside.\u201d'},
+   {t:'It mainly helps '+wholow+', and we would keep checking in with them.',skills:['Collaborative Relationships','Communicating with Impact'],score:2,out:'Good focus on who you serve. Light on the risks, but your heart is clearly in the right place.'}],timeout:2},
+ {id:'D',backer:'bld',time:22,tag:'Priya the Builder',q:'\u201cOthers have tried this. What is genuinely new about your angle?\u201d',
+  choices:[{t:'What is new is '+anglelow+', and that is hard for the big players to copy quickly.',skills:['Innovative & Curious','Creative Agility','Critical Thinking'],score:3,out:'A real edge, and you can defend it. Priya nods. This could actually work.'},
+   {t:'It is similar to others, we would just run it better.',skills:[],score:1,out:'\u201cBetter how?\u201d No clear answer. \u201cSame thing, run by you\u201d is not a reason to back you.'},
+   {t:'We focus on '+anglelow+' harder than anyone else.',skills:['Creative Agility'],score:2,out:'Focus counts. Not brand new, but doing one thing really well can be enough to start.'}],timeout:2},
+ {id:'E',backer:null,time:18,tag:'The curveball',q:'\u201cLast one. It is six months in. Money is nearly gone and it is not working yet. What do you do?\u201d',
+  choices:[{t:'Talk to users, find what is not landing, and change one big thing.',skills:['Critical Thinking','Creative Agility','Innovative & Curious'],score:3,out:'You listen and adapt instead of clinging to the plan. That is how ventures survive year one.'},
+   {t:'Work twice as hard on the same plan.',skills:['Tenacity'],score:2,out:'Grit is real, but grinding on a broken plan burns you out, not the problem. Know when to bend.'},
+   {t:'Accept it failed and walk away.',skills:[],score:1,out:'Sometimes wise, but quitting at the first wall without learning from it is not founder thinking.'}],timeout:1}];
+}
+
+function pitchBeat(){
+ var b=beats()[ST.i];setBar('THE PITCH // '+(ST.i+1)+' of 5');
+ var isStretch=b.stretchFor&&b.stretchFor.indexOf(P.growth)>=0;
+ var ch='';b.choices.forEach(function(c,idx){ch+='<button class="choice" data-i="'+idx+'">'+c.t+'</button>';});
+ body.innerHTML='<div class="fade"><div class="backers">'+backerRow(b.backer)+'</div>'+
+  '<div class="timerrow"><div class="timertrack"><div class="timerfill" id="tf"></div></div><div class="timernum" id="tn">'+b.time+'</div></div>'+
+  '<div class="qcard"><div class="qfrom">'+b.tag+(isStretch?'  \u00B7  \u25B3 YOUR STRETCH':'')+'</div><div class="qtext">'+b.q+'</div></div>'+
+  '<div class="btag">your answer</div>'+ch+'</div>';
+ var rem=b.time*10,tot=rem,tf=document.getElementById('tf'),tn=document.getElementById('tn');
+ timerId=setInterval(function(){rem--;tf.style.width=(rem/tot*100)+'%';tn.textContent=Math.ceil(rem/10);
+  if(rem/tot<.34){tf.style.background='var(--crimson)';tn.style.color='var(--crimson)';}
+  if(rem<=0){clearInterval(timerId);resolve(b,b.timeout,true,isStretch);}},100);
+ document.querySelectorAll('.choice').forEach(function(btn){btn.onclick=function(){clearInterval(timerId);resolve(b,+btn.dataset.i,false,isStretch);};});
+}
+
+function resolve(b,idx,timedOut,isStretch){
+ var c=b.choices[idx];ST.score+=c.score;ST.bs[b.id]=c.score;if(isStretch)ST.maxBeat=c.score;
+ var sig=TYPES[P.type],instinct=c.skills.indexOf(sig)>=0;if(instinct)ST.score+=1;
+ c.skills.forEach(function(s){ST.skills[s]=(ST.skills[s]||0)+1;});
+ var chips='';c.skills.forEach(function(s){chips+='<span class="skillchip">'+s+'</span>';});
+ var last=ST.i===4;
+ body.innerHTML='<div class="outcome">'+
+  (timedOut?'<div class="hesitate">\u23F1 You froze, and silence in a pitch is an answer too.</div>':'')+
+  '<div class="ohead">You said</div><div class="opick">'+c.t+'</div><div class="oout">'+c.out+'</div>'+
+  (chips?'<div class="skillchips">'+chips+'</div>':'<div class="oout" style="color:var(--faint)">No Power Skill landed there.</div>')+
+  (instinct?'<div class="instinct">\u26A1 INSTINCT: that is pure '+P.type+'. Bonus earned.</div>':'')+
+  '<button class="cta '+(last?'gold':'')+'" id="cont">'+(last?'HEAR THE VERDICT \u25B8':'NEXT \u25B8')+'</button></div>';
+ document.getElementById('cont').onclick=function(){if(last){verdict();}else{ST.i++;pitchBeat();}};
+}
+
+function vlabel(s){return s>=3?'BACKED':(s>=2?'LEANING IN':'NOT YET');}
+function verdict(){
+ setBar('THE VERDICT');
+ var map={inv:'B',com:'C',bld:'D'};var backed=0;var cards='';
+ for(var k in map){var s=ST.bs[map[k]]||0;var v=vlabel(s);if(v==='BACKED')backed++;var b=BACKERS[k];
+  cards+='<div class="vcard"><div class="av" style="background:'+b.c+'">'+b.n.charAt(0)+'</div><div><div class="vn">'+b.n+' \u00B7 '+b.l+'</div><div class="vv" style="color:'+(v==='BACKED'?'#54e08b':(v==='LEANING IN'?'#ffc24b':'#ff6b81'))+'">'+v+'</div></div></div>';}
+ var big,bl,bc,bs;
+ if(backed===3){big='FULLY FUNDED';bc='#54e08b';bs='All three backers are in. You read the room, knew your numbers, and held your nerve. That is a founder.';}
+ else if(backed===2){big='CONDITIONAL OFFER';bc='#ffc24b';bs='Two backers in, one to win over. A strong pitch with one gap to close. That is most real first rounds.';}
+ else if(backed===1){big='ONE BACKER IN';bc='#34e6f0';bs='You got someone to believe. Now go away, sharpen the weak spots, and come back stronger.';}
+ else{big='BACK TO THE DRAWING BOARD';bc='#ff6b81';bs='No offer today, and almost every famous founder heard that first. The idea is alive. Rework it and run it again.';}
+ var sk=Object.entries(ST.skills).sort(function(a,b){return b[1]-a[1];});
+ var chips2=sk.slice(0,5).map(function(x){return '<span class="chip2">'+x[0]+'</span>';}).join('')||'<span class="chip2" style="color:var(--faint);border-color:var(--line)">play to your strengths next time</span>';
+ var gnote;
+ if(ST.maxBeat>=3)gnote='Your stretch zone, <b>'+GROWTH[P.growth]+'</b>, came up in the room, and you handled it. That muscle is getting stronger.';
+ else if(ST.maxBeat===2)gnote='Your stretch zone, <b>'+GROWTH[P.growth]+'</b>, was a careful, decent play under pressure. Keep training it.';
+ else gnote='Your stretch zone, <b>'+GROWTH[P.growth]+'</b>, showed in the room. Not a failure, just the exact muscle to train before the next pitch.';
+ body.innerHTML='<div class="deb"><div class="shead">the backers decide</div>'+cards+
+  '<div class="bigverdict" style="border-color:'+bc+'66;background:linear-gradient(180deg,'+bc+'14,transparent)"><div class="l">verdict</div><div class="v" style="color:'+bc+'">'+big+'</div><div class="s">'+bs+'</div></div>'+
+  '<div class="pcard"><div class="stamp" style="color:'+bc+';border:1px solid '+bc+'66">'+big+'</div><div class="pn">'+SEL.name+'</div><div class="ptag">\u201c'+SEL.tagline+'\u201d</div>'+
+   '<div class="prow"><span class="k">Problem</span><span>'+PROBLEMS[P.world][SEL.prob]+'</span></div>'+
+   '<div class="prow"><span class="k">For</span><span>'+WHOS[P.world][SEL.who]+'</span></div>'+
+   '<div class="prow"><span class="k">Angle</span><span>'+ANGLES[SEL.angle].t+'</span></div>'+
+   '<div class="prow"><span class="k">Founder</span><span>'+P.name+', The '+P.type+'</span></div>'+
+   '<div class="prow"><span class="k">Skills</span><span><div class="chips2">'+chips2+'</div></span></div></div>'+
+  '<div class="debbox"><div class="l">\u25B3 your stretch moment</div><div class="debnote">'+gnote+'</div></div>'+
+  '<button class="cta cyan" id="reflect">ONE LAST THING \u25B8</button></div>';
+ document.getElementById('reflect').onclick=reflectScreen;
+}
+
+var MOODS=['Yes, 100%','Maybe one day','Not this, but something','Not my thing'];
+function reflectScreen(){
+ setBar('REFLECTION');
+ var chips='';MOODS.forEach(function(m){chips+='<button class="chip" data-m="'+m+'">'+m+'</button>';});
+ body.innerHTML='<div class="fade"><div class="shead">\u25CE be honest</div><div class="stitle">Would you actually want to build something one day?</div>'+
+  '<div class="chips" id="chips">'+chips+'</div>'+
+  '<p class="sintro" style="margin-bottom:10px">If you could build anything to make your world better, what would it be? (optional)</p>'+
+  '<textarea id="reflect" placeholder="Type here..."></textarea><button class="cta" id="done" style="margin-top:14px">FINISH</button></div>';
+ ST.mood=null;
+ document.querySelectorAll('#chips .chip').forEach(function(c){c.onclick=function(){document.querySelectorAll('#chips .chip').forEach(function(x){x.classList.remove('on');});c.classList.add('on');ST.mood=c.dataset.m;};});
+ document.getElementById('done').onclick=function(){ST.reflect=document.getElementById('reflect').value.trim();wrap();};
+}
+
+function wrap(){
+ setBar('DECODE YOUR FUTURE // complete');
+ var echo='';if(ST.mood||ST.reflect)echo='<div class="echo">'+(ST.mood?ST.mood+'. ':'')+(ST.reflect?'\u201c'+ST.reflect+'\u201d':'')+'</div>';
+ body.innerHTML='<div class="deb" style="text-align:center"><div class="shead" style="text-align:center">the arc, complete</div>'+
+  '<div class="stitle" style="font-size:25px;margin-top:6px">You decoded yourself.<br>You lived the day.<br>You built the thing.</div>'+
+  '<p class="sintro" style="text-align:center;max-width:42ch;margin:12px auto">That is Decode Your Future. A 24-year-old '+P.type+' in '+P.world+', and the founder of '+SEL.name+', started here, in Grade 9, with a report and a question.</p>'+
+  echo+
+  '<button class="cta gold" id="again" style="margin-top:8px">\u21BB BUILD ANOTHER VENTURE</button></div>';
+ document.getElementById('again').onclick=sync;
+}
+
+function scramble(el,final){var ch='ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&\u25AE',f=0;var id=setInterval(function(){el.textContent=final.split('').map(function(c,i){return c===' '?' ':(i<f?c:ch[Math.floor(Math.random()*ch.length)]);}).join('');f++;if(f>final.length){clearInterval(id);el.textContent=final;}},40);}
+</script>
+</body>
+</html>
