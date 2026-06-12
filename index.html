@@ -15,11 +15,12 @@ body{background:var(--bg);color:var(--ink);font-family:'Sora',sans-serif;min-hei
  background-image:radial-gradient(900px 600px at 50% -10%,rgba(255,52,87,.10),transparent 60%),radial-gradient(700px 520px at 50% 120%,rgba(255,194,75,.07),transparent 55%)}
 body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:44px 44px;opacity:.3;mask-image:radial-gradient(ellipse 80% 70% at 50% 35%,#000 40%,transparent 100%)}
 .wrap{position:relative;z-index:2;max-width:680px;margin:0 auto;padding:32px 20px 64px}
-.kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.34em;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.head{text-align:center}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.34em;color:var(--gold);text-transform:uppercase;display:inline-flex;align-items:center;gap:10px}
 .kicker::before{content:"";width:26px;height:1px;background:var(--gold)}
 h1{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(34px,7vw,56px);line-height:.98;margin:13px 0 8px}
 h1 .b{color:var(--crimson)}
-.sub{color:var(--mute);font-size:15px;font-weight:300;max-width:54ch;line-height:1.55}
+.sub{color:var(--mute);font-size:15px;font-weight:300;max-width:54ch;line-height:1.55;margin:0 auto}
 .stage{margin-top:26px;background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line2);border-radius:var(--r);box-shadow:0 34px 80px -42px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.04);overflow:hidden}
 .bar{display:flex;align-items:center;gap:8px;padding:13px 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.015);font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--faint);letter-spacing:.14em}
 .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
@@ -111,9 +112,11 @@ select{appearance:none;cursor:pointer;background-image:linear-gradient(45deg,tra
 <body>
 <div class="wrap">
   <h2 class="sr">The Pitch: build your own venture in your world, then pitch it to three backers against the clock.</h2>
-  <div class="kicker">Decode your future · station 03</div>
-  <h1>THE <span class="b">PITCH</span></h1>
-  <p class="sub">You decoded who you are. You lived a day in it. Now build something of your own, and pitch it to a room that decides whether it lives.</p>
+  <div class="head">
+    <div class="kicker">Decode your future · station 03</div>
+    <h1>THE <span class="b">PITCH</span></h1>
+    <p class="sub">You decoded who you are. You lived a day in it. Now build something of your own, and pitch it to a room that decides whether it lives.</p>
+  </div>
   <div class="stage">
     <div class="bar"><span class="dot"></span> <span id="barlabel">PITCH_ROOM // sync your profile</span></div>
     <div class="body" id="body"></div>
@@ -141,7 +144,7 @@ var ANGLES=[{t:'Make it radically cheaper',p:'making it radically cheaper'},{t:'
 var MODELS=[{t:'Sell it directly to the people who use it',p:'selling directly to the people who use it'},{t:'A small monthly subscription',p:'a small monthly subscription'},{t:'Free for users, businesses or sponsors pay',p:'letting sponsors pay so users go free'},{t:'Grant-funded, kept low-cost on purpose',p:'grant funding that keeps it low-cost'}];
 var BACKERS={inv:{n:'Zinhle',l:'Investor',c:'#ffc24b'},com:{n:'Mandla',l:'Community',c:'#54e08b'},bld:{n:'Priya',l:'Builder',c:'#34e6f0'}};
 
-var P={name:'Slade',type:'Spark',world:'Entrepreneurship',growth:'vr'};
+var P={name:'',type:'Spark',world:'Entrepreneurship',growth:'vr'};
 var SEL={prob:0,who:0,angle:0,model:0,name:'',tagline:''};
 var ST={};
 var body=document.getElementById('body');
@@ -172,8 +175,8 @@ function sync(){
 
 function hook(){
  setBar('PITCH_ROOM // '+P.world);
- body.innerHTML='<div style="padding:18px 0"><div class="hookline fade">Yesterday, you survived a day in 2035.</div>'+
-  '<div class="hookline b fade" style="animation-delay:1s">Today, you build the thing that day was about.</div></div>';
+ body.innerHTML='<div style="padding:18px 0"><div class="hookline fade">You’ve decoded who you are.</div>'+
+  '<div class="hookline b fade" style="animation-delay:1s">Now build the thing only you would build.</div></div>';
  setTimeout(function(){
   body.innerHTML='<div class="fade"><div class="backers">'+backerRow(null)+'</div>'+
    '<div style="text-align:center;padding:8px 0 4px"><div class="shead" style="text-align:center">The room is waiting</div>'+
